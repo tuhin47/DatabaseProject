@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import other.DBConfig;
 
 /**
  *
@@ -43,6 +44,7 @@ public class TestServlet extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         }
+        DBConfig db=new DBConfig();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

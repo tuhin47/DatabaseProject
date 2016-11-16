@@ -1,6 +1,5 @@
 package other;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,6 +16,11 @@ import java.sql.Statement;
  */
 public class DBConfig {
 
+    public static void main(String[] ags) {
+        DBConfig db = new DBConfig();
+
+    }
+
     private String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private String DB_URL = "jdbc:mysql://localhost:3306";
 
@@ -24,23 +28,23 @@ public class DBConfig {
     private String USER = "root";
     private String PASS = "";
 //    private String DBNAME="review";
-    
-    public static Connection conn = null;
-    public static Statement stmt = null;
+
+    Connection conn = null;
+    Statement stmt = null;
 
     public DBConfig() {
-        
-        try {
-            //STEP 2: Register JDBC driver
-            Class.forName("com.mysql.jdbc.Driver");
-            // Open a connection
-            conn = DriverManager.getConnection(DB_URL,USER, PASS);
 
-            // Execute SQL query
-            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            //System.out.println("Connecting to a selected database...");
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            stmt = conn.createStatement();
+
+            System.out.println("DB connected");
         } catch (Exception ex) {
-            System.out.println("DBConfig.<init>() "+ex);
+            System.out.println("DBConfig.<init>() " + ex);
         }
 
     }
