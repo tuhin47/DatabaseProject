@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <form>
+        <form action="FirstServlet" method="POST">
             Username:<input name="user" type="text">
             <br>
             Password:<input name="password" type="password">

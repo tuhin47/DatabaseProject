@@ -29,8 +29,8 @@ public class DBConfig {
     private String PASS = "";
 //    private String DBNAME="review";
 
-    Connection conn = null;
-    Statement stmt = null;
+    public static Connection conn = null;
+    public static Statement stmt = null;
 
     public DBConfig() {
 
