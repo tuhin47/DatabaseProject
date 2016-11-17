@@ -7,10 +7,14 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import other.DBConfig;
+import static other.DBConfig.stmt;
+import other.LoginClass;
 
 /**
  *
@@ -35,7 +39,7 @@ public class FirstServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet FirstServlet</title>");            
+            out.println("<title>Servlet FirstServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet FirstServlet at " + request.getContextPath() + "</h1>");
@@ -70,7 +74,22 @@ public class FirstServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        // processRequest(request, response);
+        PrintWriter out = response.getWriter();
+        if (request.getParameterMap().containsKey("tag") && request.getParameter("tag").equals("login")) {
+            if (LoginClass.loginData(request.getParameter("username"),
+                    request.getParameter("password"),
+                    request.getParameter("userType"))) {
+
+                request.setAttribute("name", "value");
+                request.getRequestDispatcher("studentwelcome.jsp").forward(request, response);
+                out.print("Login successful");
+
+            } else {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+
+            }
+        }
     }
 
     /**

@@ -10,17 +10,67 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Review</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <form action="FirstServlet" method="POST">
-            Username:<input name="user" type="text">
-            <br>
-            Password:<input name="password" type="password">
-            <br>
-            <input type="submit" value="Login">
-        </form>
         
-        
+        <div class="container">
+            <h2> Login</h2>
+
+
+
+            <form class="form-horizontal" action="FirstServlet" method="POST">
+                <input type="hidden" name="tag" value="login"> 
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="username">Username:</label>
+                    <div class="col-md-6">
+                        <input required name="username" type="text" placeholder="Enter your user Name" class="form-control">
+                    </div>
+
+                </div>
+
+
+
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="password">Password:</label>
+                    <div class="col-md-6">
+                        <input  required name="password" type="password" placeholder="******" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-md-6">
+                        <input type="radio" name="userType" value="teacher"   checked> Teacher
+                        <input type="radio" name="userType" value="student"   > Student
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-md-6">
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+
+        <!--        <form  action="FirstServlet" method="POST">
+                    <input type="hidden" name="tag" value="login"> 
+                    Username:<input name="user" type="text" required>
+                    <br>
+                    Password:<input name="password" type="password" required>
+                    <br>
+                    <input type="radio" name="userType" value="teacher" checked> Teacher
+                    <input type="radio" name="userType" value="student"> Student<br>
+                    <input type="submit" value="Login">
+                </form>-->
+
+
     </body>
 </html>
