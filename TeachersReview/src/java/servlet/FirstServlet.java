@@ -8,6 +8,8 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,28 +38,34 @@ public class FirstServlet extends HttpServlet {
         // processRequest(request, response);
         PrintWriter out = response.getWriter();
         if (request.getParameterMap().containsKey("tag") && request.getParameter("tag").equals("login")) {
-            if (LoginClass.loginData(request.getParameter("username"),
-                    request.getParameter("password"),
-                    request.getParameter("userType"))) {
 
-//                request.setParameter("name", "value");
-                if (isDevicePC(request)) {
-                    request.getRequestDispatcher("studentwelcome.jsp").forward(request, response);
-                }
-                out.print("Login successful");
-                out.print(request.getParameter("name"));
-
-            } else {
-                if (isDevicePC(request)) {
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
-                }
-
-                out.print("login failed");
-            }
+            tagLogin(request, response);
         }
     }
 
- 
+    private static void tagLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        PrintWriter out = response.getWriter();
+        if (LoginClass.loginData(request.getParameter("username"),
+                request.getParameter("password"),
+                request.getParameter("userType"))) {
+
+//                request.setParameter("name", "value");
+            if (isDevicePC(request)) {
+                request.getRequestDispatcher("studentwelcome.jsp").forward(request, response);
+            }
+            out.print("Login successful");
+            out.print(request.getParameter("name"));
+
+        } else {
+            if (isDevicePC(request)) {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+
+            out.print("login failed");
+        }
+
+    }
 
     public static boolean isDevicePC(HttpServletRequest request) {
         if (request.getParameterMap().containsKey("device") && request.getParameter("device").equals("PC")) {
