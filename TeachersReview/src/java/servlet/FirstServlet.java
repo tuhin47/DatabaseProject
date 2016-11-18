@@ -81,13 +81,16 @@ public class FirstServlet extends HttpServlet {
                     request.getParameter("password"),
                     request.getParameter("userType"))) {
 
-                request.setAttribute("name", "value");
+               // request.setAttribute("name", "value");
+                if (isDevicePC(request))
                 request.getRequestDispatcher("studentwelcome.jsp").forward(request, response);
                 out.print("Login successful");
 
-            } else {
+            } else  {
+                if (isDevicePC(request))
                 request.getRequestDispatcher("index.jsp").forward(request, response);
-
+               
+                out.print("login failed");
             }
         }
     }
@@ -101,5 +104,12 @@ public class FirstServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    public static boolean isDevicePC(HttpServletRequest request) {
+        if (request.getParameterMap().containsKey("device") && request.getParameter("device").equals("PC")) {
+            return true;
+        }
+        return false;
+    }
 
 }
