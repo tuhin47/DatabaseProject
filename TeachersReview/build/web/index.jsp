@@ -10,10 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Review</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap.min.css">
     </head>
     <body>
-        
+
         <div class="container">
             <h2> Login</h2>
 
@@ -21,6 +21,9 @@
 
             <form class="form-horizontal" action="FirstServlet" method="POST">
                 <input type="hidden" name="tag" value="login"> 
+                <input type="hidden" name="device" value="PC"> 
+
+
                 <div class="form-group">
                     <label class="control-label col-md-2" for="username">Username:</label>
                     <div class="col-md-6">
