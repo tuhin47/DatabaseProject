@@ -19,8 +19,10 @@ import java.util.logging.Logger;
  */
 public class DBConfig {
 
-    public static void main(String[] ags) {
-        DBConfig db = new DBConfig();
+    
+    public static void main(String[] ags) throws SQLException {
+        db.start();
+        db.close();
 
     }
 
@@ -34,19 +36,17 @@ public class DBConfig {
 
     public static Connection conn = null;
     public static Statement stmt = null;
+    public static DBConfig db=new DBConfig();
 
-    public DBConfig() {
+    public void start() {
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-
-            //System.out.println("Connecting to a selected database...");
+             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             stmt = conn.createStatement();
 
             System.out.println("DB connected");
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(DBConfig.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,5 +54,11 @@ public class DBConfig {
             Logger.getLogger(DBConfig.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public void close() throws SQLException {
+        stmt.close();
+        conn.close();
+        System.out.println("DB disconnected");
     }
 }

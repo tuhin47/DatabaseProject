@@ -1,6 +1,7 @@
 package other;
 
 import java.sql.ResultSet;
+import static other.DBConfig.db;
 import static other.DBConfig.stmt;
 
 /**
@@ -8,6 +9,10 @@ import static other.DBConfig.stmt;
  * @author TUHIN
  */
 public class LoginClass {
+    
+    public static void main(String[] args) {
+        System.out.println(loginData("2222", "1111", "student"));
+    }
 
     /*
     login for student and teacher
@@ -16,7 +21,8 @@ public class LoginClass {
 
         //System.out.println(userName + passWord + tableName);
         try {
-            DBConfig db = new DBConfig();
+            
+            db.start();
             String sql = String.format("select * from review.%s", tableName);
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -25,7 +31,7 @@ public class LoginClass {
             while (rs.next()) {
 
                 // out.println("DONE");
-                String checkuser = rs.getString("reg");
+                String checkuser = rs.getString("user");
                 String checkpass = rs.getString("password");
 
                 if (checkuser.equals(userName) && checkpass.equals(passWord)) {
@@ -34,8 +40,10 @@ public class LoginClass {
                 }
 
             }
+            rs.close();
+            db.close();
         } catch (Exception ex) {
-            System.out.println("servlet.FirstServlet.loginData()");
+            System.out.println("other.LoginClass.loginData()");
         }
 
         return false;
