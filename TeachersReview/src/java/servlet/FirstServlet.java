@@ -67,7 +67,7 @@ public class FirstServlet extends HttpServlet {
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
-     * @param response servlet response
+     * @param respons ,m e servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -81,15 +81,18 @@ public class FirstServlet extends HttpServlet {
                     request.getParameter("password"),
                     request.getParameter("userType"))) {
 
-               // request.setAttribute("name", "value");
-                if (isDevicePC(request))
-                request.getRequestDispatcher("studentwelcome.jsp").forward(request, response);
+//                request.setParameter("name", "value");
+                if (isDevicePC(request)) {
+                    request.getRequestDispatcher("studentwelcome.jsp").forward(request, response);
+                }
                 out.print("Login successful");
+                out.print(request.getParameter("name"));
 
-            } else  {
-                if (isDevicePC(request))
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-               
+            } else {
+                if (isDevicePC(request)) {
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                }
+
                 out.print("login failed");
             }
         }
