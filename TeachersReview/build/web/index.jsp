@@ -1,79 +1,60 @@
 <%-- 
-    Document   : index.jsp
-    Created on : Nov 17, 2016, 4:19:04 AM
+    Document   : test
+    Created on : Nov 19, 2016, 8:59:59 PM
     Author     : TUHIN
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Review</title>
-        <link rel="stylesheet" href="bootstrap.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="scss.css">
+        <!--<link rel="stylesheet" href="bootstrap.min.css">-->
+
+        <title>JSP Page</title>
+
+
     </head>
     <body>
 
-        <div class="container">
-            <h2> Login</h2>
+        <% String message=null;
+            message = (String) request.getAttribute("alertMsg");%>
+        
+        <div class='login'>
+            <h2>Login</h2>
 
 
-
-            <form class="form-horizontal" action="FirstServlet" method="POST">
+            <form action="FirstServlet" method="POST">
+                <%if(message!=null){%>
+                <div class="alert alert-danger" role="alert">
+                    <strong>Incorrect!!</strong> Username or Password 
+                </div> <%}%>
                 <input type="hidden" name="tag" value="login"> 
                 <input type="hidden" name="device" value="PC"> 
-
-
-                <div class="form-group">
-                    <label class="control-label col-md-2" for="username">Username:</label>
-                    <div class="col-md-6">
-                        <input required name="username" type="text" placeholder="Enter your user Name" class="form-control">
-                    </div>
-
-                </div>
-
-
-
-
-
-                <div class="form-group">
-                    <label class="control-label col-md-2" for="password">Password:</label>
-                    <div class="col-md-6">
-                        <input  required name="password" type="password" placeholder="******" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
+                <input required name='username' placeholder='Username' type='text'>
+                <input required id='pw' name='password' placeholder='Password' type='password'>
+                <!--<input name='email' placeholder='E-Mail Address' type='text'>-->
+                <div class='agree'>
                     <div class="col-sm-offset-2 col-md-6">
                         <input type="radio" name="userType" value="teacher"   checked> Teacher
                         <input type="radio" name="userType" value="student"   > Student
                     </div>
-
+                    <!--                <input id='agree' name='agree' type='checkbox'>
+                                    <label for='agree'></label>Accept rules and conditions-->
                 </div>
-
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-md-6">
-                        <button type="submit" class="btn btn-primary">
-                            Submit
-                        </button>
-
-                    </div>
-
-                </div>
-
+                <input id="signin" class='animated' type='submit' value='Sign-In'>
             </form>
+
+            <form action="signup.jsp">
+                <input id="signup" class='animated' type='submit' value='Create an account'>
+            </form>
+
+
+            <a class='forgot' href='#'>Forget password?</a>
         </div>
-
-        <!--        <form  action="FirstServlet" method="POST">
-                    <input type="hidden" name="tag" value="login"> 
-                    Username:<input name="user" type="text" required>
-                    <br>
-                    Password:<input name="password" type="password" required>
-                    <br>
-                    <input type="radio" name="userType" value="teacher" checked> Teacher
-                    <input type="radio" name="userType" value="student"> Student<br>
-                    <input type="submit" value="Login">
-                </form>-->
-
-
     </body>
 </html>

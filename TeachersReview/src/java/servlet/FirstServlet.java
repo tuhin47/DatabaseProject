@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import other.DBConfig;
 import static other.DBConfig.stmt;
 import other.LoginClass;
+import other.SignUp;
 
 /**
  *
@@ -38,8 +39,11 @@ public class FirstServlet extends HttpServlet {
         // processRequest(request, response);
         PrintWriter out = response.getWriter();
         if (request.getParameterMap().containsKey("tag") && request.getParameter("tag").equals("login")) {
-
             tagLogin(request, response);
+        }
+        if (request.getParameterMap().containsKey("tag") && request.getParameter("tag").equals("register")) {
+            //System.err.println("kala");
+            tagRegister(request, response);
         }
     }
 
@@ -55,16 +59,38 @@ public class FirstServlet extends HttpServlet {
                 request.getRequestDispatcher("studentwelcome.jsp").forward(request, response);
             }
             out.print("Login successful");
-            out.print(request.getParameter("name"));
+//            out.print(request.getParameter("name"));
 
         } else {
             if (isDevicePC(request)) {
+                request.setAttribute("alertMsg", "login failed");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
 
             out.print("login failed");
+
         }
 
+    }
+
+    public static void tagRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        PrintWriter out = response.getWriter();
+
+        if (SignUp.addUser(request.getParameter("username"), request.getParameter("password"),
+                request.getParameter("dept"), request.getParameter("userType"))) {
+            if (isDevicePC(request)) {
+                request.getRequestDispatcher("studentwelcome.jsp").forward(request, response);
+            }
+            out.print("resigter successful");
+        } else {
+            if (isDevicePC(request)) {                
+                request.setAttribute("alertMsg", "register failed");
+                request.getRequestDispatcher("signup.jsp").forward(request, response);
+            }
+
+            out.print("register failed");
+        }
     }
 
     public static boolean isDevicePC(HttpServletRequest request) {

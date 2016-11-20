@@ -28,13 +28,15 @@ public class SignUp {
     /*
     Add student/teacher into table
      */
-    private static boolean addUser(String userName, String password, String dept, String tableName) {
+    public static boolean addUser(String userName, String password, String dept, String tableName) {
 
+        System.err.println(userName+password+dept+tableName);
         try {
             db.start();
             String sql = String.format("insert into review.%s (user,password,dept) values('%s','%s','%s')", tableName, userName, password, dept);
             //System.out.println(sql);
             stmt.executeUpdate(sql);
+            System.out.println("data inserted");
             db.close();
         } catch (SQLException ex) {
             System.err.println("other.SignUp.addUser()");

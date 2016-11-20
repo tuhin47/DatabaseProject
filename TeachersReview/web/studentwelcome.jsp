@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Login Successful!</h1>
+        <h1>Successful!</h1>
         <form class="form-horizontal" action="index.jsp" method="POST">
             <div class="form-group">
                 <div class="col-sm-offset-2 col-md-6">
