@@ -46,7 +46,7 @@ public class DBConfig {
 
             stmt = conn.createStatement();
 
-            System.out.println("DB connected");
+            //System.out.println("DB connected");
 
         } catch (SQLException ex) {
             Logger.getLogger(DBConfig.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,6 +59,6 @@ public class DBConfig {
     public void close() throws SQLException {
         stmt.close();
         conn.close();
-        System.out.println("DB disconnected");
+       // System.out.println("DB disconnected");
     }
 }

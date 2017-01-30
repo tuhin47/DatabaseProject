@@ -9,7 +9,7 @@ import static other.DBConfig.stmt;
  * @author TUHIN
  */
 public class LoginClass {
-    
+
     public static void main(String[] args) {
         System.out.println(loginData("2222", "1111", "student"));
     }
@@ -21,7 +21,7 @@ public class LoginClass {
 
         //System.out.println(userName + passWord + tableName);
         try {
-            
+
             db.start();
             String sql = String.format("select * from review.%s", tableName);
             ResultSet rs = stmt.executeQuery(sql);
