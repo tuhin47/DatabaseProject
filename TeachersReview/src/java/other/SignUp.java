@@ -22,21 +22,21 @@ public class SignUp {
     check
      */
     public static void main(String[] args) {
-        System.out.println(addUser("421", "420", "420", "teacher"));
+        System.out.println(addUser("42f1", "420", "420", "teacher","@gmail"));
     }
 
     /*
     Add student/teacher into table
      */
-    public static boolean addUser(String userName, String password, String dept, String tableName) {
+    public static boolean addUser(String userName, String password, String dept, String tableName,String mail) {
 
-        System.err.println(userName+password+dept+tableName);
+        System.err.println(userName+password+dept+tableName+mail);
         try {
             db.start();
-            String sql = String.format("insert into review.%s (user,password,dept) values('%s','%s','%s')", tableName, userName, password, dept);
-            //System.out.println(sql);
+            String sql = String.format("insert into review.%s values('%s','%s','%s','%s')", tableName, userName, password, dept,mail);
+           //System.out.println(sql);
             stmt.executeUpdate(sql);
-            System.out.println("data inserted");
+           // System.out.println("data inserted");
             db.close();
         } catch (SQLException ex) {
             System.err.println("other.SignUp.addUser()");

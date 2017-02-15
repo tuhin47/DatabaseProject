@@ -32,9 +32,10 @@ public class LoginClass {
 
                 // out.println("DONE");
                 String checkuser = rs.getString("user");
+                String checkEmail=rs.getString("gmail");
                 String checkpass = rs.getString("password");
 
-                if (checkuser.equals(userName) && checkpass.equals(passWord)) {
+                if ((checkuser.equals(userName) || checkEmail.equals(userName)) && checkpass.equals(passWord)) {
                     System.out.println("login succesful");
                     return true;
                 }

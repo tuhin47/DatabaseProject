@@ -23,7 +23,7 @@
                 message = (String) request.getAttribute("alertMsg");
                 if (message != null) {%>
             <div class="alert alert-danger" role="alert">
-                 Username already exist 
+                Username already exist 
             </div> <%}%> 
             <form  action="FirstServlet" method="POST">
                 <input type="hidden" name="tag" value="register"> 

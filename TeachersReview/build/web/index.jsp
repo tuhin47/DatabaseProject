@@ -15,21 +15,21 @@
         <link rel="stylesheet" href="scss.css">
         <!--<link rel="stylesheet" href="bootstrap.min.css">-->
 
-        <title>JSP Page</title>
+        <title>Login</title>
 
 
     </head>
     <body>
 
-        <% String message=null;
+        <% String message = null;
             message = (String) request.getAttribute("alertMsg");%>
-        
-        <div class='login'>
+
+        <div class='login'>      
             <h2>Login</h2>
 
 
             <form action="FirstServlet" method="POST">
-                <%if(message!=null){%>
+                <%if (message!=null && message.equals("login failed")) {%>
                 <div class="alert alert-danger" role="alert">
                     <strong>Incorrect!!</strong> Username or Password 
                 </div> <%}%>
@@ -54,7 +54,10 @@
             </form>
 
 
-            <a class='forgot' href='#'>Forget password?</a>
+
+            <a class='forgot' href='sendmail.jsp'>Forget password?</a>
+
+
         </div>
     </body>
 </html>
