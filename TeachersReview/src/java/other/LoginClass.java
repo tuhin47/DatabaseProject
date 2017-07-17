@@ -9,7 +9,7 @@ import static other.DBConfig.stmt;
  * @author TUHIN
  */
 public class LoginClass {
-    
+
     public static void main(String[] args) {
         System.out.println(loginData("2222", "1111", "student"));
     }
@@ -21,7 +21,7 @@ public class LoginClass {
 
         //System.out.println(userName + passWord + tableName);
         try {
-            
+
             db.start();
             String sql = String.format("select * from review.%s", tableName);
             ResultSet rs = stmt.executeQuery(sql);
@@ -32,9 +32,10 @@ public class LoginClass {
 
                 // out.println("DONE");
                 String checkuser = rs.getString("user");
+                String checkEmail=rs.getString("gmail");
                 String checkpass = rs.getString("password");
 
-                if (checkuser.equals(userName) && checkpass.equals(passWord)) {
+                if ((checkuser.equals(userName) || checkEmail.equals(userName)) && checkpass.equals(passWord)) {
                     System.out.println("login succesful");
                     return true;
                 }
