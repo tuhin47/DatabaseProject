@@ -41,7 +41,7 @@ public class CourseComponent extends HttpServlet {
             String courseTitle = request.getParameter("courseName");
             String courseKey = request.getParameter("key");
             String question=request.getParameter("question");
-            int questionSetKey=Integer.parseInt(question);
+            int questionSetKey=1;//Integer.parseInt(question);
             SetKey key = new SetKey(courseCode, department, semester, courseTitle, courseKey,questionSetKey);
             if (new CourseKey().insertKey(key)) {
                 if (isDevicePC(request)) {

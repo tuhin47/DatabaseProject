@@ -14,6 +14,8 @@
         <property name="hbm2ddl.auto">update</property>
         <mapping class="org.tuhin.dto.UserDetails" />  
         <mapping class="org.tuhin.dto.SetKey"/>
-        <mapping class="org.tuhin.dto.QuestionSet"/>
+        <mapping class="org.tuhin.dto.ReviewResult"/>
+        <mapping class="org.tuhin.dto.Question"/>
+        <mapping class="org.tuhin.dto.ReviewList"/>
     </session-factory>
 </hibernate-configuration>
