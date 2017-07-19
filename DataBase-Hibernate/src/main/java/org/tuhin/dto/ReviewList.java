@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 
 /**
  *
@@ -22,31 +23,30 @@ public class ReviewList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int reviewId;
-    private String userName;
+    private int reviewListId;
     private String courseCode;
+    private int reviewNumber;
+    private int numberOfQuestion;
+
     private int questionId = 1;
 
     @ElementCollection
-    private Collection<Integer> reviewCollection = new ArrayList();
+    @JoinTable(name = "Review_Collection")
+    private Collection<Question> reviewCollection = new ArrayList();
 
     public ReviewList() {
     }
 
-    public int getReviewId() {
-        return reviewId;
+    public int getReviewNumber() {
+        return reviewNumber;
     }
 
-    public void setReviewId(int reviewId) {
-        this.reviewId = reviewId;
+    public int getReviewListId() {
+        return reviewListId;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setReviewListId(int reviewId) {
+        this.reviewListId = reviewId;
     }
 
     public String getCourseCode() {
@@ -57,12 +57,17 @@ public class ReviewList {
         this.courseCode = courseCode;
     }
 
-    public Collection<Integer> getReviewCollection() {
+    public Collection<Question> getReviewCollection() {
         return reviewCollection;
     }
 
-    public void setReviewCollection(Collection<Integer> reviewCollection) {
+    public void setReviewCollection(Collection<Question> reviewCollection) {
         this.reviewCollection = reviewCollection;
+
+    }
+
+    public void setReviewNumber(int reviewNumber) {
+        this.reviewNumber = reviewNumber;
     }
 
     public int getQuestionId() {
@@ -73,4 +78,11 @@ public class ReviewList {
         this.questionId = questionId;
     }
 
+    public int getNumberOfQuestion() {
+        return numberOfQuestion;
+    }
+
+    public void setNumberOfQuestion(int numberOfQuestion) {
+        this.numberOfQuestion = numberOfQuestion;
+    }
 }

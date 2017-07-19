@@ -112,6 +112,7 @@
 							request.getRequestDispatcher("login.jsp").forward(request, response);
 						}
 						UserDetails user = (UserDetails) firstSession.getAttribute("user");
+                                                firstSession.setAttribute("savedUser", user);
 					%>
 
 					<h5 class="centered"><%=userName%></h5>
