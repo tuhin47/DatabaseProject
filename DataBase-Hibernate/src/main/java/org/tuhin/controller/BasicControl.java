@@ -16,6 +16,16 @@ public class BasicControl {
         System.out.println(isTheReviewListExist("CSEE"));
     }
 
+    public static boolean isKeyValid(String courseCode, String key) {
+        String hql = "from SetKey where courseKey='" + key + "' and courseCode='" + courseCode + "'";
+        System.out.println(hql);
+        if (HibernateUtil.getSessionFactory().openSession().createQuery(hql).uniqueResult() != null) {
+            return true;
+        }
+        return false;
+
+    }
+
     public void insert(Object obj) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();

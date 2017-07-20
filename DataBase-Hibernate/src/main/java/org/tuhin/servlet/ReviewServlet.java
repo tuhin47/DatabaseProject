@@ -27,6 +27,7 @@ public class ReviewServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
         System.out.println(request.getParameter("tag"));
         if (request.getParameterMap().containsKey("tag") && request.getParameter("tag").equals("review")) {
             if (BasicControl.isDevicePC(request)) {
@@ -34,6 +35,16 @@ public class ReviewServlet extends HttpServlet {
             } else {
                 tagReview(request, response);
             }
+        } else if (request.getParameterMap().containsKey("tag") && request.getParameter("tag").equals("check_key")) {
+            String courseCode = request.getParameter("courseCode");
+            String key = request.getParameter("key");
+
+            if (BasicControl.isKeyValid(courseCode, key)) {
+                out.print("valid");
+            } else {
+                out.print("invalid");
+            }
+
         }
 
     }
@@ -101,7 +112,7 @@ public class ReviewServlet extends HttpServlet {
                 }
 
                 rList.setReviewCollection(data);
-                rList.setReviewNumber(totalQuestion+1);
+                rList.setReviewNumber(totalQuestion + 1);
             }
 
         }
