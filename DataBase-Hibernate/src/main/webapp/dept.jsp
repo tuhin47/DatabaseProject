@@ -40,9 +40,7 @@
     </head>
 
     <body>
-        <%
-            String userName;
-        %>
+        
 
         <section id="container">
             <!-- **********************************************************************************************************************************************************
@@ -55,7 +53,7 @@
                          data-original-title="Toggle Navigation"></div>
                 </div>
                 <!--logo start-->
-                <a href="index.html" class="logo"><b>Teacher Review</b></a>
+                <a href="main.jsp" class="logo"><b>Teacher Review</b></a>
                 <!--logo end-->
                 <div class="nav notify-row" id="top_menu">
                     <!--  notification start -->
@@ -86,55 +84,73 @@
                             <a href="main.jsp"><img src="assets/img/ui-sam.jpg"
                                                     class="img-circle" width="60"></a>
                         </p>
+
+
+
                         <%
-                            userName = (String) request.getParameter("username");
-                            HttpSession firstsession = request.getSession();
-                            if (userName != null && userName != "") {
-                                firstsession.setAttribute("savedUserName", userName);
+                            String userName = null;
+                            if (BasicControl.isTheParameterValid(request, "userName")) {
+                                userName = (String) request.getParameter("userName");
                             }
-                            userName = (String) firstsession.getAttribute("savedUserName");
+                            HttpSession firstSession = request.getSession();
+                            if (userName != null && userName != "") {
+                                firstSession.setAttribute("savedUserName", userName);
+
+                            }
+                            if (BasicControl.isTheParameterValid(request, "userName")) {
+                                userName = (String) request.getParameter("userName");
+                            }
+
+                            userName = (String) firstSession.getAttribute("savedUserName");
+                            if (userName == null) {
+                                request.setAttribute("alertMsg", "login again");
+                                request.getRequestDispatcher("login.jsp").forward(request, response);
+                            }
+                            UserDetails user = (UserDetails) firstSession.getAttribute("user");
+                            firstSession.setAttribute("savedUser", user);
                         %>
 
                         <h5 class="centered"><%=userName%></h5>
 
-                        <li class="mt"><a href="main.jsp"> <i
+
+                        <li class="mt"><a  href="main.jsp"> <i
                                     class="fa fa-dashboard"></i> <span>Profile</span>
                             </a></li>
-
                         <li class="mt"><a class="active" href="dept.jsp"> <i
                                     class="fa fa-dashboard"></i> <span>Departments</span>
                             </a></li>
 
-                        <li class="sub-menu"><a href="javascript:;"> <i
-                                    class="fa fa-cogs"></i> <span>Components</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="calendar.html">Calendar</a></li>
-                                <li><a href="gallery.html">Gallery</a></li>
 
-                            </ul></li>
+
+
                         <li class="sub-menu"><a href="javascript:;"> <i
                                     class="fa fa-book"></i> <span>Extra Pages</span>
                             </a>
                             <ul class="sub">
-
-                                <li><a href="login.html">Login</a></li>
+                                <!-- 							<li><a href="blank.html">Blank Page</a></li> -->
+                                <li><a href="login.jsp">Login</a></li>
                                 <li><a href="lock_screen.html">Lock Screen</a></li>
                             </ul></li>
-
                         <li class="sub-menu"><a href="javascript:;"> <i
-                                    class="fa fa-th"></i> <span>Data Tables</span>
+                                    class="fa fa-tasks"></i> <span>Form</span>
                             </a>
                             <ul class="sub">
-                                <li><a href="basic_table.html">Basic Table</a></li>
-                                <li><a href="responsive_table.html">Responsive Table</a></li>
+                                <li><a href="set_key.jsp">Set Up Key</a></li>
+                                <!--<li><a href="form_component.jsp">Form Components</a></li>-->
                             </ul></li>
+                        <!--					<li class="sub-menu"><a href="javascript:;"> <i
+                                                                                class="fa fa-th"></i> <span>Data Tables</span>
+                                                                </a>
+                                                                        <ul class="sub">
+                                                                                <li><a href="basic_table.html">Basic Table</a></li>
+                                                                                <li><a href="responsive_table.html">Responsive Table</a></li>
+                                                                        </ul></li>-->
                         <li class="sub-menu"><a href="javascript:;"> <i
                                     class=" fa fa-bar-chart-o"></i> <span>Charts</span>
                             </a>
                             <ul class="sub">
-                                <li><a href="morris.html">Morris</a></li>
-                                <li><a href="chartjs.html">Chartjs</a></li>
+                                <!--<li><a href="morris.html">Morris</a></li>-->
+                                <li><a href="charts.jsp">Average</a></li>
                             </ul></li>
 
                     </ul>
@@ -192,7 +208,7 @@
                                 </div><!-- --/content-panel ---->
                             </div><!-- /col-md-12 -->
 
-                            <div class="col-md-12 mt">
+<!--                            <div class="col-md-12 mt">
                                 <div class="content-panel">
                                     <h4><i class="fa fa-angle-right"></i> Student Table</h4><hr><table class="table table-hover">
 
@@ -225,8 +241,8 @@
                                             <%}%>
                                         </tbody>
                                     </table>
-                                </div><!-- --/content-panel ---->
-                            </div><!-- /col-md-12 -->
+                                </div> --/content-panel --
+                            </div> /col-md-12 -->
                         </div>
                     </div>
                 </section>

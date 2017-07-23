@@ -18,12 +18,13 @@ public class BasicControl {
 
     public static boolean isKeyValid(String courseCode, String key) {
         String hql = "from SetKey where courseKey='" + key + "' and courseCode='" + courseCode + "'";
-        System.out.println(hql);
-        if (HibernateUtil.getSessionFactory().openSession().createQuery(hql).uniqueResult() != null) {
+        System.out.println(hql);Session session = HibernateUtil.getSession();
+        if (session.createQuery(hql).uniqueResult() != null) {
+            session.close();
             return true;
         }
+        session.close();
         return false;
-
     }
 
     public void insert(Object obj) {
@@ -34,8 +35,13 @@ public class BasicControl {
         session.close();
     }
 
-    public List provideList(String name) {
-        return HibernateUtil.getSessionFactory().openSession().createQuery("from " + name).list();
+    public static List provideList(String name) {
+        Session session = HibernateUtil.getSession();
+        try {
+            return session.createQuery("from " + name).list();
+        } finally {
+            session.close();
+        }
     }
 
     public static boolean isTheParameterValid(HttpServletRequest request, String parameter) {
@@ -50,16 +56,22 @@ public class BasicControl {
     public static boolean isTheReviewExist(String courseCode, String userName) {
         String hql = "from ReviewResult where userName='" + userName + "' and courseCode='" + courseCode + "'";
         System.out.println(hql);
-        if (HibernateUtil.getSessionFactory().openSession().createQuery(hql).uniqueResult() != null) {
+
+        Session session = HibernateUtil.getSession();
+        if (session.createQuery(hql).uniqueResult() != null) {
+            session.close();
             return true;
         }
+        session.close();
         return false;
     }
 
     public static ReviewList isTheReviewListExist(String courseCode) {
 
         String hql = "from ReviewList where courseCode='" + courseCode + "'";
-        ReviewList rList = (ReviewList) HibernateUtil.getSessionFactory().openSession().createQuery(hql).uniqueResult();
+        Session session = HibernateUtil.getSession();
+        ReviewList rList = (ReviewList) session.createQuery(hql).uniqueResult();
+        session.close();
         return rList;
     }
 }

@@ -93,7 +93,7 @@
 
 
 					<%
-						String userName=null;
+						String userName = null;
 						if (BasicControl.isTheParameterValid(request, "userName")) {
 							userName = (String) request.getParameter("userName");
 						}
@@ -105,14 +105,14 @@
 						if (BasicControl.isTheParameterValid(request, "userName")) {
 							userName = (String) request.getParameter("userName");
 						}
-						
+
 						userName = (String) firstSession.getAttribute("savedUserName");
 						if (userName == null) {
 							request.setAttribute("alertMsg", "login again");
 							request.getRequestDispatcher("login.jsp").forward(request, response);
 						}
 						UserDetails user = (UserDetails) firstSession.getAttribute("user");
-                                                firstSession.setAttribute("savedUser", user);
+						firstSession.setAttribute("savedUser", user);
 					%>
 
 					<h5 class="centered"><%=userName%></h5>
@@ -127,14 +127,7 @@
 
 
 
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>Components</span>
-					</a>
-						<ul class="sub">
-							<li><a href="calendar.html">Calendar</a></li>
 
-							<!--                                 <li><a  href="todo_list.html">Todo List</a></li> -->
-						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
 							class="fa fa-book"></i> <span>Extra Pages</span>
 					</a>
@@ -148,21 +141,21 @@
 					</a>
 						<ul class="sub">
 							<li><a href="set_key.jsp">Set Up Key</a></li>
-							<li><a href="form_component.jsp">Form Components</a></li>
+							<!--<li><a href="form_component.jsp">Form Components</a></li>-->
 						</ul></li>
-					<li class="sub-menu"><a href="javascript:;"> <i
+					<!--					<li class="sub-menu"><a href="javascript:;"> <i
 							class="fa fa-th"></i> <span>Data Tables</span>
 					</a>
 						<ul class="sub">
 							<li><a href="basic_table.html">Basic Table</a></li>
 							<li><a href="responsive_table.html">Responsive Table</a></li>
-						</ul></li>
+						</ul></li>-->
 					<li class="sub-menu"><a href="javascript:;"> <i
 							class=" fa fa-bar-chart-o"></i> <span>Charts</span>
 					</a>
 						<ul class="sub">
-							<li><a href="morris.html">Morris</a></li>
-							<li><a href="chartjs.html">Chartjs</a></li>
+							<!--<li><a href="morris.html">Morris</a></li>-->
+							<li><a href="charts.jsp">Average</a></li>
 						</ul></li>
 
 				</ul>
@@ -177,39 +170,43 @@
 		<!--main content start-->
 		<section id="main-content">
 			<section class="wrapper">
+                            <br>
+                             <h3><i class="fa fa-angle-right"></i>User Details</h3>
 
 				<div class="row">
 					<div class="col-lg-9 main-chart">
-						<div class="margin-top-150">
+						<div class="form-panel">
+							<div class="margin-top-150">
 
-							<div class="table-responsive">
-								<table class="table">
-									<tr>
-										<td>Username</td>
-										<td><%=user.getUserName()%></td>
-									</tr>
-									<tr>
-										<td>First Name</td>
-										<td><%=user.getFirstName()%></td>
-									</tr>
-									<tr>
-										<td>Last Name</td>
-										<td><%=user.getLastName()%></td>
-									</tr>
-									<tr>
-										<td>Department</td>
-										<td><%=user.getDepartment()%></td>
-									</tr>
-									<tr>
-										<td>Email</td>
-										<td><%=user.getEmail()%></td>
-									</tr>
-									<tr>
-										<td>Designation</td>
-										<td><%=user.getUserType()%></td>
-									</tr>
+								<div class="table-responsive">
+									<table class="table">
+										<tr>
+											<td>Username</td>
+											<td><%=user.getUserName()%></td>
+										</tr>
+										<tr>
+											<td>First Name</td>
+											<td><%=user.getFirstName()%></td>
+										</tr>
+										<tr>
+											<td>Last Name</td>
+											<td><%=user.getLastName()%></td>
+										</tr>
+										<tr>
+											<td>Department</td>
+											<td><%=user.getDepartment()%></td>
+										</tr>
+										<tr>
+											<td>Email</td>
+											<td><%=user.getEmail()%></td>
+										</tr>
+										<tr>
+											<td>Designation</td>
+											<td><%=user.getUserType()%></td>
+										</tr>
 
-								</table>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -312,6 +309,7 @@
 	<script type="application/javascript">
 		
 		
+		
 
 
 
@@ -352,7 +350,8 @@
 
 
 
-        
+       
+	
 	
 	</script>
 

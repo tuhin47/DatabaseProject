@@ -11,6 +11,8 @@ import javax.persistence.Id;
 public class SetKey {
 
     public static void main(String[] args) {
+        
+        System.out.println("");
 
     }
 

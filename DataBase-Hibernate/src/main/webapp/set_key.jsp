@@ -1,3 +1,4 @@
+<%@page import="org.tuhin.controller.BasicControl"%>
 <%@page import="org.tuhin.dto.UserDetails"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
@@ -47,9 +48,16 @@
                          data-original-title="Toggle Navigation"></div>
                 </div>
                 <!--logo start-->
-                <a href="index.html" class="logo"><b>Teacher's Review</b></a>
+                <a href="main.jsp" class="logo"><b>Teacher Review</b></a>
                 <!--logo end-->
-                <div class="nav notify-row" id="top_menu"></div>
+                <div class="nav notify-row" id="top_menu">
+                    <!--  notification start -->
+                    <ul class="nav top-menu">
+
+
+                    </ul>
+                    <!--  notification end -->
+                </div>
                 <div class="top-menu">
                     <ul class="nav pull-right top-menu">
                         <li><a class="logout" href="login.jsp">Logout</a></li>
@@ -62,8 +70,7 @@
   MAIN SIDEBAR MENU
   *********************************************************************************************************************************************************** -->
             <!--sidebar start-->
-            <aside>
-                <div id="sidebar" class="nav-collapse ">
+            <div id="sidebar" class="nav-collapse ">
                     <!-- sidebar menu start-->
                     <ul class="sidebar-menu" id="nav-accordion">
 
@@ -75,24 +82,32 @@
 
 
                         <%
-                            String userName = (String) request.getParameter("userName");
+                            String userName = null;
+                            if (BasicControl.isTheParameterValid(request, "userName")) {
+                                userName = (String) request.getParameter("userName");
+                            }
                             HttpSession firstSession = request.getSession();
                             if (userName != null && userName != "") {
                                 firstSession.setAttribute("savedUserName", userName);
 
                             }
+                            if (BasicControl.isTheParameterValid(request, "userName")) {
+                                userName = (String) request.getParameter("userName");
+                            }
+
                             userName = (String) firstSession.getAttribute("savedUserName");
                             if (userName == null) {
                                 request.setAttribute("alertMsg", "login again");
                                 request.getRequestDispatcher("login.jsp").forward(request, response);
                             }
-
+                            UserDetails user = (UserDetails) firstSession.getAttribute("user");
+                            firstSession.setAttribute("savedUser", user);
                         %>
 
                         <h5 class="centered"><%=userName%></h5>
 
 
-                        <li class="mt"><a class="active" href="main.jsp"> <i
+                        <li class="mt"><a  href="main.jsp"> <i
                                     class="fa fa-dashboard"></i> <span>Profile</span>
                             </a></li>
                         <li class="mt"><a href="dept.jsp"> <i
@@ -101,14 +116,7 @@
 
 
 
-                        <li class="sub-menu"><a href="javascript:;"> <i
-                                    class="fa fa-cogs"></i> <span>Components</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="calendar.html">Calendar</a></li>
 
-                                <!--                                 <li><a  href="todo_list.html">Todo List</a></li> -->
-                            </ul></li>
                         <li class="sub-menu"><a href="javascript:;"> <i
                                     class="fa fa-book"></i> <span>Extra Pages</span>
                             </a>
@@ -121,28 +129,27 @@
                                     class="fa fa-tasks"></i> <span>Form</span>
                             </a>
                             <ul class="sub">
-                                <li><a href="set_key.jsp">Set Up Key</a></li>
-                                <li><a href="form_component.jsp">Form Components</a></li>
+                                <li><a class="active" href="set_key.jsp">Set Up Key</a></li>
+                                <!--<li><a href="form_component.jsp">Form Components</a></li>-->
                             </ul></li>
-                        <li class="sub-menu"><a href="javascript:;"> <i
-                                    class="fa fa-th"></i> <span>Data Tables</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="basic_table.html">Basic Table</a></li>
-                                <li><a href="responsive_table.html">Responsive Table</a></li>
-                            </ul></li>
+                        <!--					<li class="sub-menu"><a href="javascript:;"> <i
+                                                                                class="fa fa-th"></i> <span>Data Tables</span>
+                                                                </a>
+                                                                        <ul class="sub">
+                                                                                <li><a href="basic_table.html">Basic Table</a></li>
+                                                                                <li><a href="responsive_table.html">Responsive Table</a></li>
+                                                                        </ul></li>-->
                         <li class="sub-menu"><a href="javascript:;"> <i
                                     class=" fa fa-bar-chart-o"></i> <span>Charts</span>
                             </a>
                             <ul class="sub">
-                                <li><a href="morris.html">Morris</a></li>
-                                <li><a href="chartjs.html">Chartjs</a></li>
+                                <!--<li><a href="morris.html">Morris</a></li>-->
+                                <li><a href="charts.jsp">Average</a></li>
                             </ul></li>
 
                     </ul>
                     <!-- sidebar menu end-->
                 </div>
-            </aside>
             <!--sidebar end-->
 
             <!-- **********************************************************************************************************************************************************
