@@ -1,9 +1,10 @@
-package org.tuhin.controller;
+ package org.tuhin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.hibernate.Session;
 import org.tuhin.dto.ReviewList;
+import org.tuhin.dto.UserDetails;
 import org.tuhin.hibernate.HibernateUtil;
 
 /**
@@ -73,5 +74,19 @@ public class BasicControl {
         ReviewList rList = (ReviewList) session.createQuery(hql).uniqueResult();
         session.close();
         return rList;
+    }
+    public static String getThePassword(String user) {
+    	String hql = "from UserDetails where userName='" + user + "' or email='" +user + "'";
+        System.out.println(hql);
+
+        Session session = HibernateUtil.getSession();
+        UserDetails userDetail=null;
+        userDetail=(UserDetails)session.createQuery(hql).uniqueResult() ;
+        if (userDetail!= null) {
+        	session.close();
+            return userDetail.getPassword();
+        }
+        session.close();
+    	return "not registered";
     }
 }

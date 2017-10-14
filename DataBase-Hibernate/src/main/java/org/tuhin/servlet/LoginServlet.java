@@ -3,6 +3,7 @@ package org.tuhin.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.naming.ldap.BasicControl;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.tuhin.controller.LoginService;
+import org.tuhin.controller.SendMail;
 import org.tuhin.controller.SignUp;
 
 /**
@@ -36,10 +38,19 @@ public class LoginServlet extends HttpServlet {
             tagLogin(request, response);
         } else if (request.getParameterMap().containsKey("tag") && request.getParameter("tag").equals("register")) {
             tagRegister(request, response);
+        } else if (request.getParameterMap().containsKey("tag") && request.getParameter("tag").equals("sendmail")) {
+        	tagSendMail(request,response);
         }
     }
 
-    private void tagLogin(HttpServletRequest request, HttpServletResponse response)
+    private void tagSendMail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String email= request.getParameter("email");
+		SendMail.sendMail(email,org.tuhin.controller.BasicControl.getThePassword(email) );
+		 request.getRequestDispatcher("login.jsp").forward(request, response);
+	}
+
+
+	private void tagLogin(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
         PrintWriter out = response.getWriter();
