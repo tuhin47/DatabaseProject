@@ -40,7 +40,7 @@ public class SendMail {
 //compose message
         try {
             MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("tuhintowhidul9@gmail.com"));//change accordingly
+            message.setFrom(new InternetAddress(to));//change accordingly
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject("Password Of the Teacher's Review");
             message.setText("Password: " + pass);
