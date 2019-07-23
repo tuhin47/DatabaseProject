@@ -1,4 +1,4 @@
-# DatabaseProject
+# Course Feedback Collector
 It's a database project which will help teacher's and students to get overview of teacher's performance and give review after completing course under observing a teacher.The teacher can also have the student's feedback.
 
 Installition Process: 
