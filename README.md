@@ -1,7 +1,6 @@
 # Course Feedback Collector
 
-This is an academic project intends to help the teachers as well as the students. This project provides the opportunity to give or view feedback of any course.
-It combines with two platfroms( Android and Web). For web part hibernate,JSP etc are being used.
+This is an academic project that intends to help the teachers as well as the students. This project provides the opportunity to give or view feedback on any course. It combines with two platforms( Android and Web). For web part hibernate, JSP, etc are being used.
 
 ## Installition Process: 
 
